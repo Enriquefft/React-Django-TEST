@@ -7,7 +7,7 @@ function Header({ userInfo }) {
                   <Container  className='px-4'>
                         <Navbar.Brand href="/">
                               <img
-                                    src="/6transparent.png"
+                                    src="/TESTLOGO.png"
                                     alt="Profile"
                                     className="w-20 h-auto  "
                               />

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-w^$so!c6x#3_=70riee$zz7uwm-d9xbti^jq%wo=8(t+*2a9##
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', 'https://test-2-ivjz87ixo-elchale.vercel.app/']
 
 
 # Application definition
@@ -67,7 +68,9 @@ AUTH_USER_MODEL = 'main.CustomUser'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+              os.path.join(BASE_DIR, 'frontend/dist')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,10 +90,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+      'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            #'ENGINE': 'django.db.backends.postgresql',
+            'NAME': BASE_DIR / 'db.sqlite3',
+            #'NAME': 'Test-app',
+            #'USER': 'postgres',
+            #'PASSWORD': 'j1q52rpg',
+            #'HOST': 'localhost',
+            #'PORT': '5432',
+      }
 }
 
 
@@ -149,7 +158,7 @@ REST_KNOX = {
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     # NEEW
-    #BASE_DIR / 'frontend/build/static'
+    BASE_DIR / 'frontend/dist/static'
 ]
 
 
@@ -160,7 +169,13 @@ MEDIA_URL = '/images/'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5173',  
+    'http://127.0.0.1',  
 ]
 
+STATICFILES_DIRS = [BASE_DIR / 'static',]
+
 CSRF_USE_SESSIONS = True
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / '/frontend/dist/'
